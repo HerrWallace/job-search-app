@@ -2,7 +2,7 @@ import { Union } from './Union';
 
 export const Header = () => {
   return (
-    <div className='flex h-[84px] w-full max-w-full py-6 px-[11.25%] mb-10 content-center justify-between'>
+    <div className='flex h-[84px] w-full max-w-full py-6 px-[11.25%] content-center justify-between'>
       <div className='flex gap-3'>
         <Union />
         <div className='font-semibold text-2xl'>Jobored</div>
