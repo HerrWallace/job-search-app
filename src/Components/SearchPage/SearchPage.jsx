@@ -9,7 +9,7 @@ export const SearchPage = () => {
       <Filter />
       </div>
 
-      <div>
+      <div className="flex flex-col gap-4">
       <SearchBar />
       <Vacancies />
       </div>

@@ -1,5 +1,12 @@
+import { SingleVacancy } from './SingleVacancy';
+
 export const Vacancies = () => {
   return (
-    <div>Vacancies</div>
+    <>
+      <SingleVacancy />
+      <SingleVacancy />
+      <SingleVacancy />
+      <SingleVacancy />
+    </>
   )
 }
