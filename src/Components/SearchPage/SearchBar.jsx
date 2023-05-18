@@ -1,5 +1,5 @@
 import { Button, Input } from '@mantine/core';
-import { SearchIcon } from './SearchIcon';
+import { SearchIcon } from '../Assets/SearchIcon';
 
 export const SearchBar = () => {
   return (
