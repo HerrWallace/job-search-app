@@ -1,9 +1,12 @@
 /* eslint-disable react/prop-types */
 import { Button, NumberInput, Select } from '@mantine/core';
 import { useState } from 'react';
+import { Cross } from '../Assets/Cross';
+import { ArrowDown } from '../Assets/ArrowDown';
 
 export const Filter = (props) => {
-  const { data, setCatalogueKey, setValueFrom, setValueTo, valueFrom, valueTo } = props;
+  const { data, setCatalogueKey, setValueFrom, setValueTo, valueFrom, valueTo } =
+    props;
 
   const [searchValue, setSearchValue] = useState('');
 
@@ -14,15 +17,29 @@ export const Filter = (props) => {
     setSearchValue('');
   };
 
+  const styles = () => ({
+    controlUp: {
+      border: 'none',
+    },
+    controlDown: {
+      border: 'none',
+    },
+  });
+
   return (
-    <div className='w-full p-5 bg-white rounded-xl'>
-      <div className='flex items-baseline gap-6 mb-4'>
-        <span className='font-bold text-xl'>Фильтры</span>
-        <button onClick={clearAll} className='bg-inherit'>Сбросить все x</button>
+    <div className='w-full min-w-[315px] p-5 bg-white rounded-xl'>
+      <div className='flex justify-between items-start gap-6 mb-7'>
+        <div className='font-bold text-xl/5'>Фильтры</div>
+        <div onClick={clearAll} className='flex items-center'>
+          <button className='bg-inherit text-sm font-medium text-gray-500 p-0  mr-1'>
+            Сбросить все
+          </button>
+          <Cross />
+        </div>
       </div>
 
-      <div className='mb-4'>
-        <span className=' block font-bold text-xl mb-2'>Отрасль</span>
+      <div className='mb-5'>
+        <span className=' block font-bold text-base/5 mb-2'>Отрасль</span>
         <Select
           searchValue={searchValue}
           onSearchChange={setSearchValue}
@@ -31,18 +48,20 @@ export const Filter = (props) => {
           placeholder='Выберите отрасль'
           searchable
           size='md'
+          rightSection={<ArrowDown />}
           aria-label='Отрасль'
         />
       </div>
 
       <div className='flex flex-col gap-2 mb-5'>
-        <span className='block font-bold text-xl'>Оклад</span>
+        <span className='block font-bold text-base/5'>Оклад</span>
         <NumberInput
           value={valueFrom}
           onChange={setValueFrom}
           placeholder='От'
           size='md'
           aria-label='Оклад от'
+          styles={styles}
         />
         <NumberInput
           placeholder='До'
@@ -50,11 +69,14 @@ export const Filter = (props) => {
           onChange={setValueTo}
           size='md'
           aria-label='Оклад до'
+          styles={styles}
         />
       </div>
 
-      <div className='w-full' >
-        <Button fullWidth>Применить</Button>
+      <div className='w-full'>
+        <Button fullWidth radius='md' size='md'>
+          Применить
+        </Button>
       </div>
     </div>
   );

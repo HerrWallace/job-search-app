@@ -9,6 +9,9 @@ export default {
       colors: {
         'main-grey': '#F7F7F8',
         'blue-main': '#5E96FC',
+      },
+      fontFamily: {
+          'header': ['Poppins']
       }
     },
   },

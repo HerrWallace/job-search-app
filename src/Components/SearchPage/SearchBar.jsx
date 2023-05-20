@@ -14,7 +14,7 @@ export const SearchBar = () => {
         </div>
 
         <div className='absolute top-2 right-3'>
-          <Button>Поиск</Button>
+          <Button radius='md'>Поиск</Button>
         </div>
       </div>
     </>

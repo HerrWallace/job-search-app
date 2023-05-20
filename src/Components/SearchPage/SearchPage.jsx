@@ -16,7 +16,6 @@ export const SearchPage = () => {
     getCatalogue().then((result) => setData(result));
   }, []);
 
-
   return (
     <div className='flex justify-between h-screen px-[11.25%] pt-10 bg-main-grey'>
       <div>
