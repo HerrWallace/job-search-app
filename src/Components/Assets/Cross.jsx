@@ -1,4 +1,3 @@
-/* eslint-disable react/no-unknown-property */
 export const Cross = () => {
   return (
     <svg
@@ -14,7 +13,7 @@ export const Cross = () => {
         x2='4.44197'
         y2='11.7427'
         stroke='#ACADB9'
-        stroke-width='1.25'
+        strokeWidth='1.25'
       />
       <line
         x1='11.9013'
@@ -22,7 +21,7 @@ export const Cross = () => {
         x2='4.60082'
         y2='4.44197'
         stroke='#ACADB9'
-        stroke-width='1.25'
+        strokeWidth='1.25'
       />
     </svg>
   );

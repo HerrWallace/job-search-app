@@ -1,4 +1,3 @@
-/* eslint-disable react/no-unknown-property */
 export const ArrowDown = () => {
   return (
     <svg
@@ -11,8 +10,8 @@ export const ArrowDown = () => {
       <path
         d='M1 0.999999L7.21905 6.33061C7.66844 6.7158 8.33156 6.7158 8.78095 6.33061L15 1'
         stroke='#ACADB9'
-        stroke-width='1.5'
-        stroke-linecap='round'
+        strokeWidth='1.5'
+        strokeLinecap='round'
       />
     </svg>
   );

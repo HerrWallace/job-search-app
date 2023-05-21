@@ -5,7 +5,7 @@ import { Cross } from '../Assets/Cross';
 import { ArrowDown } from '../Assets/ArrowDown';
 
 export const Filter = (props) => {
-  const { data, setCatalogueKey, setValueFrom, setValueTo, valueFrom, valueTo } =
+  const { data, setCatalogueKey, setValueFrom, setValueTo, valueFrom, valueTo, searchVacancy, handleKeyword } =
     props;
 
   const [searchValue, setSearchValue] = useState('');
@@ -15,6 +15,7 @@ export const Filter = (props) => {
     setValueFrom('');
     setValueTo('');
     setSearchValue('');
+    handleKeyword('');
   };
 
   const styles = () => ({
@@ -74,7 +75,7 @@ export const Filter = (props) => {
       </div>
 
       <div className='w-full'>
-        <Button fullWidth radius='md' size='md'>
+        <Button onClick={searchVacancy} fullWidth radius='md' size='md'>
           Применить
         </Button>
       </div>

@@ -3,11 +3,11 @@ import './App.css';
 import { Header } from './Components/Header/Header';
 import { SearchPage } from './Components/SearchPage/SearchPage';
 
-function App() {
-  const theme = {
-    fontFamily: 'Inter, system-ui, Avenir, Helvetica, Arial, sans-serif',
-  };
+const theme = {
+  fontFamily: 'Inter, system-ui, Avenir, Helvetica, Arial, sans-serif',
+};
 
+function App() {
   return (
     <MantineProvider withGlobalStyles withNormalizeCSS theme={theme}>
       <>
