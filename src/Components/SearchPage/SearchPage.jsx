@@ -3,33 +3,42 @@ import { getCatalogue, getVacancies } from '../../api';
 import { Filter } from './Filter';
 import { SearchBar } from './SearchBar';
 import { Vacancies } from './Vacancies';
+import { Pagination } from '@mantine/core';
 
 export const SearchPage = () => {
   const [vacancyData, setVacancyData] = useState([]);
+  const [vacanciesTotal, setVacanciesTotal] = useState(0);
   const [keyword, setKeyword] = useState('');
   const [catalogueData, setCatalogueData] = useState([]);
   const [catalogueKey, setCatalogueKey] = useState('');
   const [valueFrom, setValueFrom] = useState('');
+  const [activePage, setActivePage] = useState(1);
   const [valueTo, setValueTo] = useState('');
 
   const [isLoaded, setIsLoaded] = useState(false);
-
-  // const [page, setPage] = useState(0);
 
   useEffect(() => {
     getCatalogue().then((result) => setCatalogueData(result));
     getVacancies().then((result) => {
       setVacancyData(result.objects);
+      setVacanciesTotal(result.total > 500 ? 125 : result.total / 4);
       setIsLoaded(true);
     });
   }, []);
 
+  useEffect(() => {
+    searchVacancy();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activePage]);
+
   const searchVacancy = async () => {
     setIsLoaded(false);
-    getVacancies(keyword, catalogueKey, valueFrom, valueTo).then((result) => {
-      setVacancyData(result.objects);
-      setIsLoaded(true);
-    });
+    getVacancies(keyword, catalogueKey, valueFrom, valueTo, activePage).then(
+      (result) => {
+        setVacancyData(result.objects);
+        setIsLoaded(true);
+      }
+    );
   };
 
   return (
@@ -47,13 +56,31 @@ export const SearchPage = () => {
         />
       </div>
 
-      <div className='flex flex-col gap-4'>
+      <div className='flex flex-col'>
         <SearchBar
           searchVacancy={searchVacancy}
           keyword={keyword}
           handleKeyword={setKeyword}
         />
-        {isLoaded ? <Vacancies vacancyData={vacancyData} /> : 'Loading, please MEOW'}
+        {isLoaded ? (
+          <>
+            <Vacancies vacancyData={vacancyData} />
+            <Pagination
+              value={activePage}
+              onChange={setActivePage}
+              total={vacanciesTotal}
+              boundaries={0}
+              position='center'
+              styles={() => ({
+                dots: {
+                  display: 'none',
+                },
+              })}
+            />
+          </>
+        ) : (
+          'Loading, please MEOW'
+        )}
       </div>
     </div>
   );

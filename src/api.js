@@ -51,14 +51,18 @@ const getToken = async () => {
 };
 
 export const getVacancies = async (...params) => {
-  const [keyword, catalogueKey, valueFrom, valueTo] = [...params];
+  const [keyword, catalogueKey, valueFrom, valueTo, activePage = 1] = [...params];
+
   const paramKeyword = keyword ? `&keyword=${keyword}` : '';
   const catalogues = catalogueKey ? `&catalogues=${catalogueKey}` : '';
   const value_from = valueFrom ? `&payment_from=${valueFrom}` : '';
   const value_to = valueTo ? `&payment_to=${valueTo}` : '';
   const noAgreement = valueFrom || valueTo ? `&no_agreement=1` : '';
 
-  const paramSource = `${source2}/vacancies/?published=1&page=0&count=4${paramKeyword}${catalogues}${value_from}${value_to}${noAgreement}`;
+  const paramSource = `${source2}/vacancies/?published=1&page=${
+    activePage - 1
+  }&count=4${paramKeyword}${catalogues}${value_from}${value_to}${noAgreement}`;
+  
   console.log(paramSource);
 
   if (!localStorage.getItem('access_token')) {
@@ -73,6 +77,6 @@ export const getVacancies = async (...params) => {
       'x-api-app-id': xApiAppId,
     },
   });
-  console.log(response.data.objects);
+  console.log(response.data);
   return response.data;
 };

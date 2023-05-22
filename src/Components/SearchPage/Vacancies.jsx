@@ -8,9 +8,5 @@ export const Vacancies = (props) => {
     return <SingleVacancy key={Math.random()} data={item} />;
   });
 
-  return (
-    <>
-      {vacancies}
-    </>
-  );
+  return <div className='flex flex-col gap-y-4 mt-4 mb-10'>{vacancies}</div>;
 };
