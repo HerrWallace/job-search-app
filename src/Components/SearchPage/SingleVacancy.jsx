@@ -1,4 +1,5 @@
 /* eslint-disable react/prop-types */
+import { Link } from 'react-router-dom';
 import { LocationIcon } from '../Assets/LocationIcon';
 import { StarIcon } from '../Assets/StarIcon';
 
@@ -10,6 +11,7 @@ export const SingleVacancy = (props) => {
     payment_from: paymentFrom,
     payment_to: paymentTo,
     currency,
+    id,
   } = props.data;
 
   const from = paymentFrom ? `от ${paymentFrom} ${currency}` : '';
@@ -20,9 +22,12 @@ export const SingleVacancy = (props) => {
   return (
     <div className='flex flex-col justify-between bg-white p-6 rounded-xl min-h-[137px]'>
       <div className='flex justify-between content-start'>
-        <a href='#' className='font-semibold text-xl/6 text-blue-main'>
+        <Link
+          to={`vacancy/${id}`}
+          className='font-semibold text-xl/6 text-blue-main'
+        >
           {profession}
-        </a>
+        </Link>
         <button className='bg-inherit p-0'>
           <StarIcon />
         </button>

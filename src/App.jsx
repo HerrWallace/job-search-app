@@ -2,6 +2,8 @@ import { MantineProvider } from '@mantine/core';
 import './App.css';
 import { Header } from './Components/Header/Header';
 import { SearchPage } from './Components/SearchPage/SearchPage';
+import { Route, Routes } from 'react-router-dom';
+import { VacancyPage } from './Components/VacancyPage/VacancyPage';
 
 const theme = {
   fontFamily: 'Inter, system-ui, Avenir, Helvetica, Arial, sans-serif',
@@ -12,7 +14,10 @@ function App() {
     <MantineProvider withGlobalStyles withNormalizeCSS theme={theme}>
       <>
         <Header />
-        <SearchPage />
+        <Routes>
+          <Route path='/' element={<SearchPage />} />
+          <Route path='/vacancy/:vacId' element={<VacancyPage />} />
+        </Routes>
       </>
     </MantineProvider>
   );

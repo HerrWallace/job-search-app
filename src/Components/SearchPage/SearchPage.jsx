@@ -28,6 +28,7 @@ export const SearchPage = () => {
 
   useEffect(() => {
     searchVacancy();
+    console.log(`useEffect active page activated. Current page is ${activePage}`);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activePage]);
 

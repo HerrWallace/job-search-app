@@ -51,22 +51,46 @@ const getToken = async () => {
 };
 
 export const getVacancies = async (...params) => {
-  const [keyword, catalogueKey, valueFrom, valueTo, activePage = 1] = [...params];
+  const [keyword, catalogueKey, valueFrom, valueTo, activePage = 1, id] = [
+    ...params,
+  ];
 
   const paramKeyword = keyword ? `&keyword=${keyword}` : '';
   const catalogues = catalogueKey ? `&catalogues=${catalogueKey}` : '';
   const value_from = valueFrom ? `&payment_from=${valueFrom}` : '';
   const value_to = valueTo ? `&payment_to=${valueTo}` : '';
   const noAgreement = valueFrom || valueTo ? `&no_agreement=1` : '';
+  const vacId = id ? `&id_vacancy=${id}` : '';
 
   const paramSource = `${source2}/vacancies/?published=1&page=${
     activePage - 1
-  }&count=4${paramKeyword}${catalogues}${value_from}${value_to}${noAgreement}`;
-  
+  }&count=4${paramKeyword}${catalogues}${value_from}${value_to}${noAgreement}${vacId}`;
+
   console.log(paramSource);
 
   if (!localStorage.getItem('access_token')) {
-    getToken();
+    await getToken();
+  }
+
+  const response = await axios.get(paramSource, {
+    headers: {
+      'Content-Type': 'application/json',
+      'x-secret-key': xSecretKey,
+      Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+      'x-api-app-id': xApiAppId,
+    },
+  });
+  console.log(response.data);
+  return response.data;
+};
+
+export const getSingleVacancy = async (id) => {
+  const paramSource = `${source2}/vacancies/${id}`;
+
+  console.log(paramSource);
+
+  if (!localStorage.getItem('access_token')) {
+    await getToken();
   }
 
   const response = await axios.get(paramSource, {
