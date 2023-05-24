@@ -2,6 +2,8 @@
 import { Link } from 'react-router-dom';
 import { LocationIcon } from '../Assets/LocationIcon';
 import { StarIcon } from '../Assets/StarIcon';
+import { StarActiveIcon } from './../Assets/StarActiveIcon';
+import { useState } from 'react';
 
 export const SingleVacancy = (props) => {
   const {
@@ -14,6 +16,25 @@ export const SingleVacancy = (props) => {
     id,
   } = props.data;
 
+  //
+  const getStorage = () => {
+    return JSON.parse(localStorage.getItem('favourites') || '[]');
+  };
+
+  const [isFaved, setIsFaved] = useState(getStorage().includes(id));
+   
+  const addToFavorite = () => {
+    if (!isFaved) {
+      const newStorageItem = [...getStorage(), id];
+      localStorage.setItem('favourites', JSON.stringify(newStorageItem));
+      setIsFaved(true);
+    } else {
+      const newStorageItem = getStorage().filter((savedId) => savedId !== id);
+      localStorage.setItem('favourites', JSON.stringify(newStorageItem));
+      setIsFaved(false);
+    }
+  };
+
   const from = paymentFrom ? `от ${paymentFrom} ${currency}` : '';
   const to = paymentTo ? `до ${paymentTo} ${currency}` : '';
   const dash = paymentFrom && paymentTo ? ' - ' : '';
@@ -23,13 +44,18 @@ export const SingleVacancy = (props) => {
     <div className='flex flex-col justify-between bg-white p-6 rounded-xl min-h-[137px]'>
       <div className='flex justify-between content-start'>
         <Link
-          to={`vacancy/${id}`}
+          to={`/vacancy/${id}`}
           className='font-semibold text-xl/6 text-blue-main'
         >
           {profession}
         </Link>
-        <button className='bg-inherit p-0'>
-          <StarIcon />
+        <button
+          onClick={() => {
+            addToFavorite();
+          }}
+          className='bg-inherit p-0'
+        >
+          {isFaved ? <StarActiveIcon /> : <StarIcon />}
         </button>
       </div>
 

@@ -3,7 +3,7 @@ import { getCatalogue, getVacancies } from '../../api';
 import { Filter } from './Filter';
 import { SearchBar } from './SearchBar';
 import { Vacancies } from './Vacancies';
-import { Pagination } from '@mantine/core';
+import { Loader, Pagination } from '@mantine/core';
 
 export const SearchPage = () => {
   const [vacancyData, setVacancyData] = useState([]);
@@ -28,7 +28,6 @@ export const SearchPage = () => {
 
   useEffect(() => {
     searchVacancy();
-    console.log(`useEffect active page activated. Current page is ${activePage}`);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activePage]);
 
@@ -43,7 +42,7 @@ export const SearchPage = () => {
   };
 
   return (
-    <div className='flex gap-7 justify-between h-screen px-[11.25%] pt-10 bg-main-grey'>
+    <div className='flex gap-7 justify-between h-desktop px-[11.25%] pt-10 bg-main-grey'>
       <div>
         <Filter
           data={catalogueData}
@@ -66,22 +65,24 @@ export const SearchPage = () => {
         {isLoaded ? (
           <>
             <Vacancies vacancyData={vacancyData} />
-            <Pagination
-              value={activePage}
-              onChange={setActivePage}
-              total={vacanciesTotal}
-              boundaries={0}
-              position='center'
-              styles={() => ({
-                dots: {
-                  display: 'none',
-                },
-              })}
-            />
           </>
         ) : (
-          'Loading, please MEOW'
+          <div className='flex h-[72.5vh] items-center justify-center'>
+            <Loader />
+          </div>
         )}
+        <Pagination
+          value={activePage}
+          onChange={setActivePage}
+          total={vacanciesTotal}
+          boundaries={0}
+          position='center'
+          styles={() => ({
+            dots: {
+              display: 'none',
+            },
+          })}
+        />
       </div>
     </div>
   );

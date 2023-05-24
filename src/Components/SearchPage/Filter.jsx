@@ -31,7 +31,7 @@ export const Filter = (props) => {
     <div className='w-full min-w-[315px] p-5 bg-white rounded-xl'>
       <div className='flex justify-between items-start gap-6 mb-7'>
         <div className='font-bold text-xl/5'>Фильтры</div>
-        <div onClick={clearAll} className='flex items-center'>
+        <div onClick={clearAll} className='flex items-center cursor-pointer'>
           <button className='bg-inherit text-sm font-medium text-gray-500 p-0  mr-1'>
             Сбросить все
           </button>

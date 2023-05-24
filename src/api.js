@@ -46,7 +46,6 @@ const getToken = async () => {
     }
   );
   localStorage.setItem('access_token', response.data.access_token);
-  console.log('Token is asked.(getToken)');
   return response.data;
 };
 
@@ -66,7 +65,6 @@ export const getVacancies = async (...params) => {
     activePage - 1
   }&count=4${paramKeyword}${catalogues}${value_from}${value_to}${noAgreement}${vacId}`;
 
-  console.log(paramSource);
 
   if (!localStorage.getItem('access_token')) {
     await getToken();
@@ -80,14 +78,34 @@ export const getVacancies = async (...params) => {
       'x-api-app-id': xApiAppId,
     },
   });
-  console.log(response.data);
   return response.data;
 };
 
 export const getSingleVacancy = async (id) => {
   const paramSource = `${source2}/vacancies/${id}`;
 
-  console.log(paramSource);
+  if (!localStorage.getItem('access_token')) {
+    await getToken();
+  }
+
+  const response = await axios.get(paramSource, {
+    headers: {
+      'Content-Type': 'application/json',
+      'x-secret-key': xSecretKey,
+      Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+      'x-api-app-id': xApiAppId,
+    },
+  });
+  return response.data;
+};
+
+export const getFavVacancies = async (ids) => {
+  let fullIdParam = '?';
+  ids.forEach((id) => {
+    fullIdParam = fullIdParam + `ids[]=${id}&`
+  });
+  const paramSource = `${source2}/vacancies/${fullIdParam}`;
+
 
   if (!localStorage.getItem('access_token')) {
     await getToken();
@@ -101,6 +119,5 @@ export const getSingleVacancy = async (id) => {
       'x-api-app-id': xApiAppId,
     },
   });
-  console.log(response.data);
   return response.data;
 };
