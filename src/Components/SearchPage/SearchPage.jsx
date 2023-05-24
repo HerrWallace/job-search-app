@@ -4,6 +4,7 @@ import { Filter } from './Filter';
 import { SearchBar } from './SearchBar';
 import { Vacancies } from './Vacancies';
 import { Loader, Pagination } from '@mantine/core';
+import { Header } from './../Header/Header';
 
 export const SearchPage = () => {
   const [vacancyData, setVacancyData] = useState([]);
@@ -37,46 +38,50 @@ export const SearchPage = () => {
   };
 
   return (
-    <div className='flex gap-7 justify-between h-desktop px-[11.25%] pt-10 pb-5 bg-main-grey'>
-      <div>
-        <Filter
-          data={catalogueData}
-          setCatalogueKey={setCatalogueKey}
-          setValueFrom={setValueFrom}
-          setValueTo={setValueTo}
-          valueFrom={valueFrom}
-          valueTo={valueTo}
-          searchVacancy={searchVacancy}
-          handleKeyword={setKeyword}
-        />
-      </div>
+    <>
+      <Header tab={0} />
+      
+      <div className='flex gap-7 justify-between h-desktop px-[11.25%] pt-10 pb-5 bg-main-grey'>
+        <div>
+          <Filter
+            data={catalogueData}
+            setCatalogueKey={setCatalogueKey}
+            setValueFrom={setValueFrom}
+            setValueTo={setValueTo}
+            valueFrom={valueFrom}
+            valueTo={valueTo}
+            searchVacancy={searchVacancy}
+            handleKeyword={setKeyword}
+          />
+        </div>
 
-      <div className='flex flex-col'>
-        <SearchBar
-          searchVacancy={searchVacancy}
-          keyword={keyword}
-          handleKeyword={setKeyword}
-        />
-        {isLoaded ? (
-          <Vacancies vacancyData={vacancyData} />
-        ) : (
-          <div className='flex h-[72.5vh] items-center justify-center'>
-            <Loader />
-          </div>
-        )}
-        <Pagination
-          value={activePage}
-          onChange={setActivePage}
-          total={vacanciesTotal}
-          boundaries={0}
-          position='center'
-          styles={() => ({
-            dots: {
-              display: 'none',
-            },
-          })}
-        />
+        <div className='flex flex-col'>
+          <SearchBar
+            searchVacancy={searchVacancy}
+            keyword={keyword}
+            handleKeyword={setKeyword}
+          />
+          {isLoaded ? (
+            <Vacancies vacancyData={vacancyData} />
+          ) : (
+            <div className='flex h-[72.5vh] items-center justify-center'>
+              <Loader />
+            </div>
+          )}
+          <Pagination
+            value={activePage}
+            onChange={setActivePage}
+            total={vacanciesTotal}
+            boundaries={0}
+            position='center'
+            styles={() => ({
+              dots: {
+                display: 'none',
+              },
+            })}
+          />
+        </div>
       </div>
-    </div>
+    </>
   );
 };

@@ -4,6 +4,7 @@ import { EmptyState } from './EmptyState';
 import { getFavVacancies } from '../../api';
 import { Loader } from '@mantine/core';
 import { getStorage } from '../../misc';
+import { Header } from '../Header/Header';
 
 export const FavoritesPage = () => {
   const areFavsEmpty = !(getStorage().length > 0);
@@ -20,20 +21,31 @@ export const FavoritesPage = () => {
   }, [areFavsEmpty]);
 
   if (areFavsEmpty) {
-    return <EmptyState />;
+    return (
+      <>
+        <Header tab={1} />
+        <EmptyState />;
+      </>
+    );
   }
 
   if (!isLoaded) {
     return (
-      <div className='flex h-[80vh] items-center justify-center'>
-        <Loader />
-      </div>
+      <>
+        <Header tab={1} />
+        <div className='flex h-[80vh] items-center justify-center'>
+          <Loader />
+        </div>
+      </>
     );
   }
 
   return (
-    <div className='w-full px-[23%] pt-10 items-center bg-main-grey h-desktop'>
-      <Vacancies vacancyData={vacancyData} />
-    </div>
+    <>
+      <Header tab={1} />
+      <div className='w-full px-[23%] pt-10 items-center bg-main-grey h-desktop'>
+        <Vacancies vacancyData={vacancyData} />
+      </div>
+    </>
   );
 };

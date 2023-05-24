@@ -4,6 +4,7 @@ import { getSingleVacancy } from '../../api';
 import { SingleVacancy } from '../SearchPage/SingleVacancy';
 import parse from 'html-react-parser';
 import { Loader } from '@mantine/core';
+import { Header } from '../Header/Header';
 
 export const VacancyPage = () => {
   const { vacId: id } = useParams();
@@ -30,11 +31,14 @@ export const VacancyPage = () => {
   }
 
   return (
-    <div className='flex flex-col px-[23%] h-desktop bg-main-grey'>
-      <div className='pt-10 pb-5 w-full'>
-        <SingleVacancy data={data} />
+    <>
+      <Header tab={0} />
+      <div className='flex flex-col px-[23%] min-h-[90.7] bg-main-grey'>
+        <div className='pt-10 pb-5 w-full'>
+          <SingleVacancy data={data} />
+        </div>
+        <div className='p-6 pt-4 bg-white rounded-xl'>{parse(richText)}</div>
       </div>
-      <div className='p-6 pt-4 bg-white rounded-xl'>{parse(richText)}</div>
-    </div>
+    </>
   );
 };
