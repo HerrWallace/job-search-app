@@ -27,11 +27,17 @@ export const SearchPage = () => {
     });
   }, []);
 
+  useEffect(() => {
+    searchVacancy();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activePage]);
+
   const searchVacancy = async () => {
     setIsLoaded(false);
     getVacancies(keyword, catalogueKey, valueFrom, valueTo, activePage).then(
       (result) => {
         setVacancyData(result.objects);
+        setVacanciesTotal(result.total > 500 ? 125 : result.total / 4);
         setIsLoaded(true);
       }
     );
