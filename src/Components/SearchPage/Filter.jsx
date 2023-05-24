@@ -5,8 +5,16 @@ import { Cross } from '../Assets/Cross';
 import { ArrowDown } from '../Assets/ArrowDown';
 
 export const Filter = (props) => {
-  const { data, setCatalogueKey, setValueFrom, setValueTo, valueFrom, valueTo, searchVacancy, handleKeyword } =
-    props;
+  const {
+    data,
+    setCatalogueKey,
+    setValueFrom,
+    setValueTo,
+    valueFrom,
+    valueTo,
+    searchVacancy,
+    handleKeyword,
+  } = props;
 
   const [searchValue, setSearchValue] = useState('');
 
@@ -51,6 +59,7 @@ export const Filter = (props) => {
           size='md'
           rightSection={<ArrowDown />}
           aria-label='Отрасль'
+          data-elem='industry-select'
         />
       </div>
 
@@ -63,6 +72,7 @@ export const Filter = (props) => {
           size='md'
           aria-label='Оклад от'
           styles={styles}
+          data-elem='salary-from-input'
         />
         <NumberInput
           placeholder='До'
@@ -71,11 +81,18 @@ export const Filter = (props) => {
           size='md'
           aria-label='Оклад до'
           styles={styles}
+          data-elem='salary-to-input'
         />
       </div>
 
       <div className='w-full'>
-        <Button onClick={searchVacancy} fullWidth radius='md' size='md'>
+        <Button
+          onClick={searchVacancy}
+          fullWidth
+          radius='md'
+          size='md'
+          data-elem='search-button'
+        >
           Применить
         </Button>
       </div>

@@ -42,7 +42,7 @@ export const SearchPage = () => {
   };
 
   return (
-    <div className='flex gap-7 justify-between h-desktop px-[11.25%] pt-10 bg-main-grey'>
+    <div className='flex gap-7 justify-between h-desktop px-[11.25%] pt-10 pb-5 bg-main-grey'>
       <div>
         <Filter
           data={catalogueData}

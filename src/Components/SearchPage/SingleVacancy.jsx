@@ -41,7 +41,7 @@ export const SingleVacancy = (props) => {
   const salary = from || to ? `з/п ${from}${dash}${to}` : 'Не указана';
 
   return (
-    <div className='flex flex-col justify-between bg-white p-6 rounded-xl min-h-[137px]'>
+    <div className='flex flex-col justify-between bg-white p-6 rounded-xl min-h-[137px]' data-elem={`vacancy-${id}`}>
       <div className='flex justify-between content-start'>
         <Link
           to={`/vacancy/${id}`}
@@ -54,6 +54,7 @@ export const SingleVacancy = (props) => {
             addToFavorite();
           }}
           className='bg-inherit p-0'
+          data-elem={`vacancy-${id}-shortlist-button`}
         >
           {isFaved ? <StarActiveIcon /> : <StarIcon />}
         </button>
