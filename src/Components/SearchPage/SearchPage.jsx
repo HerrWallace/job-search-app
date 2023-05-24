@@ -26,11 +26,6 @@ export const SearchPage = () => {
     });
   }, []);
 
-  useEffect(() => {
-    searchVacancy();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [activePage]);
-
   const searchVacancy = async () => {
     setIsLoaded(false);
     getVacancies(keyword, catalogueKey, valueFrom, valueTo, activePage).then(
@@ -63,9 +58,7 @@ export const SearchPage = () => {
           handleKeyword={setKeyword}
         />
         {isLoaded ? (
-          <>
-            <Vacancies vacancyData={vacancyData} />
-          </>
+          <Vacancies vacancyData={vacancyData} />
         ) : (
           <div className='flex h-[72.5vh] items-center justify-center'>
             <Loader />

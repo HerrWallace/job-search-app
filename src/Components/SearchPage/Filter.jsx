@@ -4,6 +4,15 @@ import { useState } from 'react';
 import { Cross } from '../Assets/Cross';
 import { ArrowDown } from '../Assets/ArrowDown';
 
+const styles = () => ({
+  controlUp: {
+    border: 'none',
+  },
+  controlDown: {
+    border: 'none',
+  },
+});
+
 export const Filter = (props) => {
   const {
     data,
@@ -25,15 +34,6 @@ export const Filter = (props) => {
     setSearchValue('');
     handleKeyword('');
   };
-
-  const styles = () => ({
-    controlUp: {
-      border: 'none',
-    },
-    controlDown: {
-      border: 'none',
-    },
-  });
 
   return (
     <div className='w-full min-w-[315px] p-5 bg-white rounded-xl'>

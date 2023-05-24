@@ -4,6 +4,7 @@ import { LocationIcon } from '../Assets/LocationIcon';
 import { StarIcon } from '../Assets/StarIcon';
 import { StarActiveIcon } from './../Assets/StarActiveIcon';
 import { useState } from 'react';
+import { getStorage } from '../../misc';
 
 export const SingleVacancy = (props) => {
   const {
@@ -16,13 +17,8 @@ export const SingleVacancy = (props) => {
     id,
   } = props.data;
 
-  //
-  const getStorage = () => {
-    return JSON.parse(localStorage.getItem('favourites') || '[]');
-  };
-
   const [isFaved, setIsFaved] = useState(getStorage().includes(id));
-   
+
   const addToFavorite = () => {
     if (!isFaved) {
       const newStorageItem = [...getStorage(), id];
@@ -41,7 +37,10 @@ export const SingleVacancy = (props) => {
   const salary = from || to ? `з/п ${from}${dash}${to}` : 'Не указана';
 
   return (
-    <div className='flex flex-col justify-between bg-white p-6 rounded-xl min-h-[137px]' data-elem={`vacancy-${id}`}>
+    <div
+      className='flex flex-col justify-between bg-white p-6 rounded-xl min-h-[137px]'
+      data-elem={`vacancy-${id}`}
+    >
       <div className='flex justify-between content-start'>
         <Link
           to={`/vacancy/${id}`}

@@ -3,26 +3,23 @@ import { Vacancies } from '../SearchPage/Vacancies';
 import { EmptyState } from './EmptyState';
 import { getFavVacancies } from '../../api';
 import { Loader } from '@mantine/core';
-
-const getStorage = () => {
-  return JSON.parse(localStorage.getItem('favourites') || '[]');
-};
+import { getStorage } from '../../misc';
 
 export const FavoritesPage = () => {
-  const isFavsEmpty = !(getStorage().length > 0);
+  const areFavsEmpty = !(getStorage().length > 0);
   const [vacancyData, setVacancyData] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    if (!isFavsEmpty) {
+    if (!areFavsEmpty) {
       getFavVacancies(getStorage()).then((result) => {
         setVacancyData(result.objects);
         setIsLoaded(true);
       });
     }
-  }, [isFavsEmpty]);
+  }, [areFavsEmpty]);
 
-  if (isFavsEmpty) {
+  if (areFavsEmpty) {
     return <EmptyState />;
   }
 
@@ -36,7 +33,7 @@ export const FavoritesPage = () => {
 
   return (
     <div className='w-full px-[23%] pt-10 items-center bg-main-grey h-desktop'>
-        <Vacancies vacancyData={vacancyData} />
+      <Vacancies vacancyData={vacancyData} />
     </div>
   );
 };
